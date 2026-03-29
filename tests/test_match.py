@@ -45,7 +45,8 @@ def test_find_similar_stimuli():
 def test_find_similar_includes_self():
     with tempfile.TemporaryDirectory() as tmp:
         cm, ids = _setup(Path(tmp))
-        target = cm.load_brain_preds("clip_000")[0]
+        # Use mean-averaged prediction as target to match default aggregation
+        target = cm.load_brain_preds("clip_000").mean(axis=0)
         results = find_similar_stimuli(cm, target, ids, top_k=5)
         assert results[0][0] == "clip_000"
         assert results[0][1] > 0.99

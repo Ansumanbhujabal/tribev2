@@ -22,7 +22,7 @@ def find_similar_stimuli(
     target: np.ndarray,
     stimulus_ids: list[str],
     top_k: int = 5,
-    time_aggregation: str = "first",
+    time_aggregation: str = "mean",
 ) -> list[tuple[str, float]]:
     """Find stimuli whose brain predictions are most similar to a target pattern.
 
