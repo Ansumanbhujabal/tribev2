@@ -1,0 +1,16 @@
+[
+  {
+    "id": "clip_001",
+    "name": "Jack Ma Motivation",
+    "category": "Speech",
+    "media_type": "video",
+    "duration_sec": 10.0
+  },
+  {
+    "id": "clip_002",
+    "name": "Muay Thai Kick",
+    "category": "Silence + Visuals",
+    "media_type": "video",
+    "duration_sec": 8.0
+  }
+]

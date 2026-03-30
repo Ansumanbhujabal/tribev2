@@ -39,6 +39,3 @@ CODEBASE_GUIDE.md
 
 # Cache zip files
 neurolens_cache*.zip
-
-# Generated cache (large binary files)
-neurolens_cache/
