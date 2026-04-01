@@ -107,8 +107,8 @@ class ExtractWordsFromAudio(EventsTransform):
         device = "cuda" if torch.cuda.is_available() else "cpu"
         if device == "cuda":
             capability = torch.cuda.get_device_capability()
-            # P100 (sm_60) doesn't support efficient float16 in CTranslate2
-            compute_type = "float16" if capability >= (7, 0) else "int8"
+            # P100 (sm_60) only supports float32 in CTranslate2; T4+ supports float16
+            compute_type = "float16" if capability >= (7, 0) else "float32"
         else:
             compute_type = "float32"
 
