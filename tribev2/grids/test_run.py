@@ -12,7 +12,7 @@ import os
 from exca import ConfDict
 
 from ..main import TribeExperiment  # type: ignore
-from .defaults import default_config
+from .configs import mini_config
 
 update = {
     "data.num_workers": 0,
@@ -27,7 +27,7 @@ update = {
     "data.study.transforms.query.query": "subject_timeline_index<3",
 }
 
-updated_config = ConfDict(default_config)
+updated_config = ConfDict(mini_config)
 updated_config.update(update)
 
 

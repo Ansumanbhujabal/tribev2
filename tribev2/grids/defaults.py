@@ -18,7 +18,6 @@ BASEDIR = os.getenv("SAVEPATH")
 CACHEDIR = os.path.join(BASEDIR, "cache", PROJECT_NAME)
 SAVEDIR = os.path.join(BASEDIR, "results", PROJECT_NAME)
 N_CPUS = 20
-CACHE_N_LAYERS = 20
 
 for path in [CACHEDIR, SAVEDIR, DATADIR]:
     Path(path).mkdir(parents=True, exist_ok=True)
@@ -32,7 +31,6 @@ text_feature = {
     "contextualized": True,
     "layers": [0, 0.2, 0.4, 0.6, 0.8, 1.0],
     "batch_size": 4,
-    "cache_n_layers": CACHE_N_LAYERS,
 }
 image_feature = {
     "name": "HuggingFaceVideo",
@@ -45,7 +43,6 @@ image_feature = {
         "layers": 2 / 3,
         "infra": {"keep_in_ram": False},
         "batch_size": 4,
-        "cache_n_layers": CACHE_N_LAYERS,
     },
 }
 video_feature = image_feature | {
@@ -55,7 +52,6 @@ video_feature = image_feature | {
         "model_name": "facebook/vjepa2-vitg-fpc64-256",
         "infra": {"keep_in_ram": False},
         "layers": [0.75, 1.0],
-        "cache_n_layers": CACHE_N_LAYERS,
     },
 }
 audio_feature = {
@@ -64,7 +60,6 @@ audio_feature = {
     "layers": [0.75, 1.0],
     "event_types": "Audio",
     "aggregation": "sum",
-    "cache_n_layers": CACHE_N_LAYERS,
 }
 neuro_extractor = {
     "name": "FmriExtractor",

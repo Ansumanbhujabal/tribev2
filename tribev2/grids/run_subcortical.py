@@ -8,7 +8,7 @@ from exca import ConfDict
 from neuraltrain.utils import run_grid
 
 from ..main import TribeExperiment  # type: ignore
-from .defaults import default_config
+from .configs import mini_config
 
 GRID_NAME = "subcortical"
 
@@ -36,7 +36,7 @@ grid = {
 
 
 if __name__ == "__main__":
-    updated_config = ConfDict(default_config)
+    updated_config = ConfDict(mini_config)
     updated_config.update(update)
 
     out = run_grid(
