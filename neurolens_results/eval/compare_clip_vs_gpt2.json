@@ -1,0 +1,9 @@
+{
+  "model_a": "clip",
+  "model_b": "gpt2",
+  "rsa_a": 0.3857,
+  "rsa_b": -0.1429,
+  "alignment_pct_a": 38.6,
+  "alignment_pct_b": 0,
+  "winner": "clip"
+}

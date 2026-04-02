@@ -1,0 +1,32 @@
+[
+  {
+    "stimulus_id": "clip_001",
+    "name": "Jack Ma Motivation",
+    "category": "Speech",
+    "contrast_score": 0.2131
+  },
+  {
+    "stimulus_id": "clip_003",
+    "name": "Ronaldo Motivation",
+    "category": "Speech",
+    "contrast_score": 0.1141
+  },
+  {
+    "stimulus_id": "clip_004",
+    "name": "Romantic Couple",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.0365
+  },
+  {
+    "stimulus_id": "clip_002",
+    "name": "Muay Thai Kick",
+    "category": "Silence + Visuals",
+    "contrast_score": -0.0384
+  },
+  {
+    "stimulus_id": "clip_005",
+    "name": "Food Reel",
+    "category": "Silence + Visuals",
+    "contrast_score": -0.0428
+  }
+]

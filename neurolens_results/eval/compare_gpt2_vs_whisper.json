@@ -1,0 +1,9 @@
+{
+  "model_a": "gpt2",
+  "model_b": "whisper",
+  "rsa_a": -0.1429,
+  "rsa_b": 0.0286,
+  "alignment_pct_a": 0,
+  "alignment_pct_b": 2.9,
+  "winner": "whisper"
+}

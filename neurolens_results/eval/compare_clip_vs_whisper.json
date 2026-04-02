@@ -1,0 +1,9 @@
+{
+  "model_a": "clip",
+  "model_b": "whisper",
+  "rsa_a": 0.3857,
+  "rsa_b": 0.0286,
+  "alignment_pct_a": 38.6,
+  "alignment_pct_b": 2.9,
+  "winner": "clip"
+}

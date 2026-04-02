@@ -1,0 +1,32 @@
+[
+  {
+    "stimulus_id": "clip_006",
+    "name": "High Impact Music",
+    "category": "Music",
+    "contrast_score": 0.3291
+  },
+  {
+    "stimulus_id": "clip_003",
+    "name": "Ronaldo Motivation",
+    "category": "Speech",
+    "contrast_score": 0.3206
+  },
+  {
+    "stimulus_id": "clip_001",
+    "name": "Jack Ma Motivation",
+    "category": "Speech",
+    "contrast_score": 0.1345
+  },
+  {
+    "stimulus_id": "clip_002",
+    "name": "Muay Thai Kick",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.1314
+  },
+  {
+    "stimulus_id": "clip_005",
+    "name": "Food Reel",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.1165
+  }
+]

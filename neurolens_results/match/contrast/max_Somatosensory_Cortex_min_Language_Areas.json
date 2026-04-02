@@ -1,0 +1,32 @@
+[
+  {
+    "stimulus_id": "clip_006",
+    "name": "High Impact Music",
+    "category": "Music",
+    "contrast_score": 0.4825
+  },
+  {
+    "stimulus_id": "clip_003",
+    "name": "Ronaldo Motivation",
+    "category": "Speech",
+    "contrast_score": 0.2187
+  },
+  {
+    "stimulus_id": "clip_005",
+    "name": "Food Reel",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.173
+  },
+  {
+    "stimulus_id": "clip_004",
+    "name": "Romantic Couple",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.0944
+  },
+  {
+    "stimulus_id": "clip_002",
+    "name": "Muay Thai Kick",
+    "category": "Silence + Visuals",
+    "contrast_score": -0.0222
+  }
+]

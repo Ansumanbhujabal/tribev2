@@ -1,0 +1,32 @@
+[
+  {
+    "stimulus_id": "clip_005",
+    "name": "Food Reel",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.1726
+  },
+  {
+    "stimulus_id": "clip_002",
+    "name": "Muay Thai Kick",
+    "category": "Silence + Visuals",
+    "contrast_score": -0.0018
+  },
+  {
+    "stimulus_id": "clip_004",
+    "name": "Romantic Couple",
+    "category": "Silence + Visuals",
+    "contrast_score": -0.1631
+  },
+  {
+    "stimulus_id": "clip_006",
+    "name": "High Impact Music",
+    "category": "Music",
+    "contrast_score": -0.2188
+  },
+  {
+    "stimulus_id": "clip_001",
+    "name": "Jack Ma Motivation",
+    "category": "Speech",
+    "contrast_score": -0.2499
+  }
+]

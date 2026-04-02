@@ -1,0 +1,32 @@
+[
+  {
+    "stimulus_id": "clip_006",
+    "name": "High Impact Music",
+    "category": "Music",
+    "contrast_score": 0.1684
+  },
+  {
+    "stimulus_id": "clip_003",
+    "name": "Ronaldo Motivation",
+    "category": "Speech",
+    "contrast_score": 0.1349
+  },
+  {
+    "stimulus_id": "clip_005",
+    "name": "Food Reel",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.0811
+  },
+  {
+    "stimulus_id": "clip_004",
+    "name": "Romantic Couple",
+    "category": "Silence + Visuals",
+    "contrast_score": 0.0547
+  },
+  {
+    "stimulus_id": "clip_001",
+    "name": "Jack Ma Motivation",
+    "category": "Speech",
+    "contrast_score": 0.0182
+  }
+]

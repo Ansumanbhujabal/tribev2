@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-04-01T18:17:52.303041+00:00",
+  "cache_dir": "neurolens_cache",
+  "stimuli_count": 6,
+  "models": [
+    "clip",
+    "gpt2",
+    "whisper"
+  ],
+  "modules": {
+    "predict": {
+      "stimuli": 6,
+      "total_brain_plots": 90
+    },
+    "match": {
+      "more_like_this": 6,
+      "contrast_pairs": 72
+    },
+    "eval": {
+      "leaderboard_models": 3,
+      "comparisons": 3
+    }
+  }
+}
