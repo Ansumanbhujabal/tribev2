@@ -253,6 +253,118 @@ The directory structure `embeddings/{model_name}/{stimulus_id}.pt` is also a des
 
 ## 5. RSA Deep Dive
 
+### The Core Problem: How Do You Compare Brain Predictions to AI Models?
+
+TRIBE v2 outputs a brain activation map: `(n_timesteps, 20,484 vertices)` — a prediction of what every point on the cortical surface does for a given video.
+
+CLIP outputs a 512-dim embedding. GPT-2 outputs a 768-dim embedding. Whisper outputs a 512-dim embedding.
+
+**You can't directly compare a 20,484-dim brain vector to a 512-dim CLIP vector.** They live in completely different spaces. So how do you compare them?
+
+### The Answer: Compare Relationships, Not Vectors
+
+Instead of comparing vectors directly, RSA compares **how stimuli relate to each other** in each space. The key insight: if both spaces agree that "Jack Ma and Ronaldo are similar, but both are different from Food Reel," then they have aligned representational geometry — regardless of dimensionality.
+
+### The Full Pipeline (How It Actually Works)
+
+```
+Step 1: Run TRIBE v2 on all 6 videos → 6 brain prediction vectors
+        Then aggregate 20,484 vertices → 9 ROI scores per stimulus
+Step 2: Run CLIP on all 6 videos → 6 CLIP embedding vectors (512-dim)
+Step 3: For brain space, compute pairwise cosine similarity
+         between all 6 stimuli → 6×6 matrix (15 unique pairs)
+Step 4: For CLIP space, compute the same → 6×6 matrix (15 unique pairs)
+Step 5: Extract upper triangles of both matrices (15 values each)
+Step 6: Spearman rank correlation between the two lists of 15 values
+         → single RSA score
+```
+
+### Concrete Example (With Real-ish Numbers)
+
+Say you have 3 stimuli. The brain says:
+```
+Brain similarities:
+  Jack Ma ↔ Ronaldo = 0.80  (similar brain patterns — both speech)
+  Jack Ma ↔ Food    = 0.16  (very different — speech vs visual)
+  Ronaldo ↔ Food    = 0.20  (different)
+```
+
+CLIP says:
+```
+CLIP similarities:
+  Jack Ma ↔ Ronaldo = 0.75  (similar visual frames — both people talking)
+  Jack Ma ↔ Food    = 0.22  (different — person vs food)
+  Ronaldo ↔ Food    = 0.30  (different)
+```
+
+Both agree on the ranking: Jack Ma & Ronaldo are most similar, Food is the odd one out. → **High RSA score** (CLIP "thinks like the brain").
+
+Now GPT-2 says:
+```
+GPT-2 similarities:
+  Jack Ma ↔ Ronaldo = 0.95  (both "motivation, speech" text → very similar)
+  Jack Ma ↔ Food    = 0.10  (different text descriptions)
+  Ronaldo ↔ Food    = 0.12  (different text descriptions)
+```
+
+GPT-2 over-groups the speech stimuli and can't see that the brain treats them differently (Jack Ma is auditory-linguistic dominant, Ronaldo is motor-dominant). → **Low or negative RSA**.
+
+### Why Not Compare Embeddings Directly?
+
+| Approach | Problem |
+|----------|---------|
+| Direct cosine sim (brain vs CLIP) | Dimensions don't match (20,484 vs 512) — literally impossible |
+| Project to same space (PCA, linear probe) | Requires paired training data, loses relational structure |
+| CKA (Centered Kernel Alignment) | Works but less interpretable than RSA |
+| **RSA** | **Works across any dimensions**, only needs multiple stimuli in both spaces |
+
+That's the elegance of RSA — it's **model-agnostic and dimension-agnostic**. You can compare any two representation spaces as long as you have the same set of stimuli in both.
+
+### The Role of ROI Aggregation
+
+Before computing brain-space similarity, we don't use all 20,484 vertices directly (too noisy, too high-dimensional for just 6 stimuli). We aggregate:
+
+```
+20,484 vertices → group by HCP atlas regions → 9 ROI scores
+  (Visual Cortex, Auditory Cortex, Language Areas, Motor Cortex, etc.)
+```
+
+So the "brain vector" for each stimulus is 9 numbers — one per brain region. This makes cosine similarity between stimuli meaningful and stable.
+
+### The Full Pipeline in Code
+
+```python
+# 1. Load brain predictions (from TRIBE v2 precompute)
+brain_preds = cache.load_brain_preds("clip_001")  # (T, 20484)
+
+# 2. Aggregate to ROI summary (time-averaged)
+roi_summary = summarize_by_roi_group(brain_preds.mean(axis=0))  # 9 values
+
+# 3. Load model embeddings
+clip_emb = cache.load_embedding("clip", "clip_001")  # (512,)
+
+# 4. For each model, build pairwise similarity matrix across all stimuli
+brain_sim_matrix = cosine_similarity(all_brain_rois)     # (6, 6)
+clip_sim_matrix = cosine_similarity(all_clip_embeddings)  # (6, 6)
+
+# 5. RSA = Spearman correlation of upper triangles
+rsa_score = spearmanr(
+    brain_sim_matrix[upper_triangle],
+    clip_sim_matrix[upper_triangle]
+).correlation
+# → 0.386 for CLIP, 0.029 for Whisper, -0.143 for GPT-2
+```
+
+### What Each Score Means (Our Actual Results)
+
+| Model | RSA Score | What It Tells Us |
+|-------|-----------|-----------------|
+| CLIP = +0.386 | Moderate alignment | CLIP's visual geometry partially matches brain geometry. Stimuli CLIP sees as similar are also neurally similar. |
+| Whisper = +0.029 | Near-zero | Audio features don't capture brain organization. 3/6 stimuli are silent → Whisper gives near-identical embeddings for very different brain responses. |
+| GPT-2 = -0.143 | Anti-correlated | Text-based similarity actively *contradicts* brain similarity. "Jack Ma" and "Ronaldo" look similar in text but differ in the brain. |
+
+---
+
 ### The Math, Step by Step
 
 Given N stimuli with representations in two spaces (AI model vs. brain):
