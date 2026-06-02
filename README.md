@@ -218,9 +218,10 @@ tribev2/
 If you use this software, please share your results with the broader research community using the following citation:
 
 ```bibtex
-@article{dAscoli2026TribeV2,
+@article{dascoli2026foundation,
   title={A foundation model of vision, audition, and language for in-silico neuroscience},
-  author={d'Ascoli, St{\'e}phane and Rapin, J{\'e}r{\'e}my and Benchetrit, Yohann and Brookes, Teon and Begany, Katelyn and Raugel, Jos{\'e}phine and Banville, Hubert and King, Jean-R{\'e}mi},
+  author={d'Ascoli, St{\'e}phane and Rapin, J{\'e}r{\'e}my and Benchetrit, Yohann and Brooks, Teon and Begany, Katelyn and Raugel, Jos{\'e}phine and Banville, Hubert and King, Jean-R{\'e}mi},
+  journal={arXiv preprint arXiv:2605.04326},
   year={2026}
 }
 ```
